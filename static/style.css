@@ -1,0 +1,193 @@
+/* BharatInvest — clean investment-desk theme */
+:root{
+  --bg:#f4f6f8; --card:#ffffff; --ink:#16232f; --muted:#67717d;
+  --navy:#153a5b; --line:#e4e8ec;
+  --green:#0c7a43; --teal:#0f766e; --amber:#b7791f; --red:#b3372c; --saffron:#e07b24;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+h1,h2,h3{margin:.2em 0 .4em}
+h2{font-size:17px}h3{font-size:14px}
+a{color:var(--navy)}
+code{background:#eef1f4;border-radius:4px;padding:1px 5px;font-size:12px}
+.muted{color:var(--muted)}
+.scan-refresh-note{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:10px;background:#fff7e6;color:#92400e;font-size:11px;font-weight:600}
+
+/* price action chips */
+.trend-chip{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11px;font-weight:700}
+.t-up{background:#e7f6ec;color:#15803d}
+.t-down{background:#fdeaea;color:#b91c1c}
+.t-side{background:#eef1f4;color:#475569}
+.bo-chip{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11px;font-weight:700}
+.bo-fresh{background:#dcfce7;color:#166534;border:1px solid #86efac}
+.bo-plain{background:#f1f5f9;color:#475569}
+.bo-false{background:#fef3c7;color:#92400e}
+.bo-down{background:#fee2e2;color:#991b1b}
+.pa-sig{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;margin:2px 0 8px;flex-wrap:wrap}
+.sig-buy{background:#e7f6ec;color:#15803d}
+.sig-bo{background:#dcfce7;color:#166534}
+.sig-turn{background:#e0f2fe;color:#0369a1}
+.sig-wait{background:#f1f5f9;color:#475569}
+.sig-caution{background:#fdeaea;color:#b91c1c}
+.pa-sig-note{font-weight:400;font-size:12.5px;color:inherit}
+.pa-box{border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;background:var(--card)}
+.pa-box>b{display:block;margin-bottom:6px;font-size:12.5px;color:var(--navy)}
+.pa-kv{display:flex;justify-content:space-between;gap:8px;padding:2.5px 0;align-items:center;flex-wrap:wrap}
+.pa-status{padding:0 6px;border-radius:8px;background:#eef1f4;font-size:10.5px;font-weight:700}
+.live-chip{display:inline-block;padding:1px 7px;border-radius:10px;background:#dcfce7;color:#15803d;font-weight:700;animation:none}
+.small{font-size:12.5px}
+
+/* header */
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:20px;padding:10px 22px;background:#fff;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--navy),#1d5f8f);color:#fff;font:700 19px/36px sans-serif;text-align:center}
+.brand-name{font-weight:700;font-size:15.5px}
+.brand-tag{font-size:11px;color:var(--muted)}
+.tabs{display:flex;gap:4px;margin-left:8px}
+.tab{border:0;background:transparent;padding:8px 14px;border-radius:8px;font-weight:600;color:var(--muted);cursor:pointer}
+.tab:hover{background:#f0f3f6;color:var(--ink)}
+.tab.active{background:var(--navy);color:#fff}
+.note{margin-left:auto;font-size:11px;color:var(--amber);border:1px dashed #ecd9b8;padding:4px 10px;border-radius:8px;white-space:nowrap}
+
+/* tab pages — sirf active tab dikhna chahiye */
+.tab-page{display:none}
+.tab-page.active{display:block}
+
+main{max-width:1200px;margin:0 auto;padding:18px 22px 60px}
+.grid{display:grid;gap:14px}
+.cols-3{grid-template-columns:1fr 1fr 1fr}
+.market-grid{grid-template-columns:repeat(4,1fr)}
+.top-grid{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.market-grid,.top-grid,.cols-3{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.market-grid,.top-grid,.cols-3{grid-template-columns:1fr}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 2px 10px}
+.section-head>*{margin:0}
+
+/* market strip */
+.market{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow)}
+.market .name{font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.market .val{font-size:19px;font-weight:700}
+.chg-up{color:var(--green)} .chg-down{color:var(--red)}
+
+/* buttons + inputs */
+.btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.btn:hover{background:#f2f5f8}
+.btn-primary{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn-primary:hover{background:#1d4d78}
+.btn-sm{padding:4px 10px;font-size:12px}
+input,select{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font:inherit;background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:2px solid #cfe0f1;border-color:#9db9d6}
+
+/* tables */
+.table-wrap{overflow:auto;max-height:520px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{position:sticky;top:0;background:#f8fafb;border-bottom:1px solid var(--line);padding:8px 9px;text-align:left;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;cursor:pointer;white-space:nowrap}
+td{padding:8px 9px;border-bottom:1px solid #f0f3f5;white-space:nowrap}
+tr.rowlink{cursor:pointer}
+tr.rowlink:hover{background:#f5f9fc}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+
+/* badges & pills */
+.badge{display:inline-block;padding:2.5px 9px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.02em}
+.b-strong{background:#e5f5ec;color:var(--green)}
+.b-buy{background:#e0f2f1;color:var(--teal)}
+.b-hold{background:#fdf3e3;color:var(--amber)}
+.b-avoid,.b-weak{background:#fdeceb;color:var(--red)}
+.pill{display:inline-block;background:#eef1f4;border-radius:999px;padding:3px 9px;margin:3px 4px 0 0;font-size:12px}
+.pill.good{background:#e5f5ec;color:var(--green)}
+.pill.bad{background:#fdeceb;color:var(--red)}
+.pill.info{background:#e8f0f7;color:var(--navy)}
+
+/* top candidate cards */
+.top-card{cursor:pointer}
+.top-card .rank{position:absolute;right:14px;top:10px;font-size:26px;font-weight:800;color:#e7ecf1}
+.top-card{position:relative}
+.top-card .nm{font-weight:700;font-size:14px}
+.score-ring{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--ink);flex:none}
+
+/* stock detail */
+.detail-head{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.detail-head h2{margin:0;font-size:19px}
+.dq{font-size:11px;padding:3px 8px;border-radius:6px;font-weight:700}
+.dq-high{background:#e5f5ec;color:var(--green)}
+.dq-medium{background:#fdf3e3;color:var(--amber)}
+.dq-low{background:#fdeceb;color:var(--red)}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;font-size:13px}
+.kv b{font-weight:600}
+.kv span{color:var(--muted)}
+.pillar-row{margin:8px 0}
+.pillar-bar{height:8px;background:#edf0f3;border-radius:99px;overflow:hidden}
+.pillar-bar>div{height:100%;border-radius:99px}
+.chk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.chk-item{background:#f8fafb;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:12.5px}
+.chk-item b{display:block;font-size:12.5px}
+.news-item{padding:7px 0;border-bottom:1px solid #f0f3f5;font-size:13px}
+.news-item a{color:var(--ink);text-decoration:none}
+.news-item a:hover{color:var(--navy)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px}
+.dot-p{background:var(--green)} .dot-n{background:var(--red)} .dot-m{background:#9aa5b1}
+.filters{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin:10px 0 6px}
+.filters label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--muted);font-weight:600}
+.filters label.chk{flex-direction:row;align-items:center;gap:7px;color:var(--ink);font-size:13px}
+.range-pair{display:flex;gap:5px;align-items:center}
+.search-row{display:flex;gap:10px;margin-top:8px}
+.search-row input{flex:1;min-width:240px}
+.sens{width:100%;border-collapse:collapse;font-size:12px}
+.sens td,.sens th{padding:3px 7px;border:1px solid var(--line);text-align:right}
+.sens th:first-child,.sens td:first-child{text-align:left;background:#f8fafb}
+.scenario{display:flex;gap:10px;margin-top:6px}
+.scenario div{flex:1;border:1px solid var(--line);border-radius:10px;padding:8px 10px;text-align:center}
+.scenario .lbl{font-size:11px;color:var(--muted);font-weight:700}
+.scenario .val{font-size:16px;font-weight:700}
+.sc-bull{background:#eaf7f0}.sc-base{background:#eef4fa}.sc-bear{background:#fdeceb}
+
+footer{border-top:1px solid var(--line);background:#fff;padding:14px 22px;font-size:11.5px;color:var(--muted)}
+.loading{display:inline-block;width:14px;height:14px;border:2px solid #c9d3dc;border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.banner{background:#fdeceb;border:1px solid #f5c6c0;color:#8f3129;padding:10px 14px;border-radius:10px;margin:10px 0;font-size:13px}
+
+/* ---------- portfolio tab ---------- */
+.market-grid{grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}
+.val-cheap{color:var(--green)} .val-fair{color:var(--amber)} .val-dear{color:var(--red)}
+.hold-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.dellink{border:0;background:none;color:var(--red);font-weight:700;cursor:pointer;font-size:13px;padding:0 4px}
+.dellink:hover{background:#fdeceb;border-radius:6px}
+.chip{display:inline-block;background:#eef1f4;border-radius:999px;padding:2px 10px;margin:3px 4px 0 0;font-size:11.5px;color:var(--muted)}
+.chip b{color:var(--ink)}
+
+/* 10-yr financials + announcements (deep dive) */
+details.finsec{margin:8px 0;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fbfcfd}
+details.finsec:first-of-type{margin-top:2px}
+details.finsec summary{cursor:pointer;font-weight:700;font-size:13px}
+details.finsec[open] summary{padding-bottom:6px}
+.fin-table{width:100%;border-collapse:collapse;font-size:11.5px;table-layout:auto}
+.fin-table td,.fin-table th{padding:3px 7px;border-bottom:1px solid #f0f3f5;white-space:nowrap}
+.fin-table td:first-child,.fin-table th:first-child{text-align:left;font-weight:600;color:var(--ink);position:sticky;left:0;background:#fbfcfd}
+.fin-table th{text-align:right;color:var(--muted);font-weight:600;background:#fbfcfd}
+.fin-table td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.ann-item{padding:7px 0;border-bottom:1px dashed #eef1f4;font-size:12.5px}
+.ann-item a{color:var(--navy);text-decoration:none}
+.ann-item .cat{display:inline-block;background:#e8f0f7;color:var(--navy);border-radius:6px;padding:1px 7px;font-size:10.5px;font-weight:700;margin-right:6px}
+.pct-list li{margin:4px 0;font-size:12.5px}
+.pct-list{padding-left:18px;margin:2px 0 8px}
+
+/* ---------- AI explain layer (Gemini) ---------- */
+.ai-btn{border:1px solid #dbe6ef;background:#f4f9ff;color:var(--navy);border-radius:999px;font-size:10.5px;font-weight:700;padding:2px 9px;cursor:pointer;margin-left:6px;white-space:nowrap}
+.ai-btn:hover{background:#e3eefb}
+.ai-out{margin-top:8px}
+.ai-card{background:#f7fbff;border:1px solid #d8e7f5;border-left:4px solid var(--navy);border-radius:10px;padding:10px 14px;font-size:13px}
+.ai-card p{margin:4px 0 6px}
+.ai-head{font-weight:800;font-size:11px;color:var(--navy);letter-spacing:.04em;margin-bottom:4px}
+.ai-err{border-left-color:var(--red);background:#fff7f6;border-color:#f3d3ce;color:#8f3129}
+.gloss-wrap{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 2px}
+.gloss{background:#fff;border:1px solid #d8e7f5;border-radius:8px;padding:2px 8px;font-size:11.5px}
+.gloss b{color:var(--navy)}
+.ai-src{margin-top:6px}
+.ai-ask-row{display:flex;gap:8px;margin-top:12px}
+.ai-ask-row input{flex:1;min-width:200px;font-size:12.5px;padding:6px 10px}
+.ai-off-note{margin-top:12px;font-size:11.5px;color:#92400e;background:#fff8ec;border:1px dashed #ecd9b8;border-radius:8px;padding:6px 10px}
+.ai-modal-back{position:fixed;inset:0;background:rgba(20,30,40,.45);display:flex;align-items:center;justify-content:center;z-index:100}
+.ai-modal{background:#fff;border-radius:14px;padding:18px 20px;width:min(540px,92vw);box-shadow:0 20px 60px rgba(16,24,40,.25);max-height:86vh;overflow:auto}

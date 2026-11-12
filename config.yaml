@@ -1,0 +1,53 @@
+# ==========================================================
+# BharatInvest configuration — saare thresholds ek jagah
+# (Transparency: har weight yahin visible hai, no black box)
+# ==========================================================
+
+# AI explain layer (Google AI Studio / Gemini) — page ka data beginner bhasha me samjhata hai
+# Key: UI ke ⚙️ AI button se daalo -> .ai_key file (local, gitignored) YA env GOOGLE_AI_API_KEY
+ai:
+  model: gemini-3-flash-preview   # fast + new-key compatible; Google deprecate kare to fallback aage khud chalta hai
+  fallback_models: [gemini-3.8-flash, gemini-flash-latest]
+  enabled: true                # key na ho to AI UI khud hide ho jaata hai
+  max_output_tokens: 2048
+  cache_hours: 168             # same content -> same explanation (7 din) — quota bachao
+
+service:
+  host: 127.0.0.1
+  port: 8000
+
+# Pillar weights (investment-focused). Sum = 1.0
+weights:
+  quality: 0.30      # Buffett-style: ROE, ROCE, debt, CFO quality, F-Score
+  growth: 0.20       # Screener-style: revenue/profit growth, EPS trend
+  valuation: 0.20    # DCF + relative: PE vs peers, margin of safety
+  technical: 0.15    # Trend strength: 200DMA, relative strength, RSI
+  risk: 0.15         # Red flags: debt, volatility, drawdown, liquidity
+
+# Rating cutoffs (final score 0-100)
+ratings:
+  strong_buy: 78     # >= 78  -> STRONG BUY
+  buy: 68            # >= 68  -> BUY
+  hold: 55           # >= 55  -> HOLD (buy on dips)
+  weak: 40           # >= 40  -> AVOID for now; below -> AVOID
+
+# Valuation (Investo-style EPV/DCF, conservative defaults)
+valuation:
+  discount_rate: 0.11      # ~ RBI 10y G-Sec + equity risk premium
+  terminal_growth: 0.04
+  forecast_years: 5
+  max_growth_cap: 0.20     # growth assumption capped (no fantasy projections)
+  mos_strong: 0.20         # margin of safety >= 20% -> strong point
+  mos_some: 0.0            # >= 0%  -> some cushion
+
+# Cache TTL (hours) — data freshness vs speed
+cache_ttl_hours:
+  fundamentals: 12
+  prices: 6
+  analyze: 6
+  scan: 1
+  market: 0.25
+  news: 6
+
+scan:
+  max_workers: 8

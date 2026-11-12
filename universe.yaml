@@ -1,0 +1,108 @@
+# ==========================================================
+# BharatInvest universe — Nifty 50 + quality extras
+# Symbol: Company Name (NSE list;  BSE-only stock chahiye to
+# neeche extra_focus me "500325.BO" jaisa code daal do)
+# Edit freely — scan auto picks this file.
+# ==========================================================
+
+sectors:
+  IT Services:
+    TCS: Tata Consultancy Services
+    INFY: Infosys
+    HCLTECH: HCL Technologies
+    WIPRO: Wipro
+    TECHM: Tech Mahindra
+    PERSISTENT: Persistent Systems
+
+  Banking - Private:
+    HDFCBANK: HDFC Bank
+    ICICIBANK: ICICI Bank
+    AXISBANK: Axis Bank
+    KOTAKBANK: Kotak Mahindra Bank
+    INDUSINDBK: IndusInd Bank
+
+  Banking - PSU:
+    SBIN: State Bank of India
+
+  NBFC & Finance:
+    BAJFINANCE: Bajaj Finance
+    BAJAJFINSV: Bajaj Finserv
+    JIOFIN: Jio Financial Services
+    SHRIRAMFIN: Shriram Finance
+
+  Insurance:
+    SBILIFE: SBI Life Insurance
+    HDFCLIFE: HDFC Life Insurance
+
+  FMCG & Consumer:
+    HINDUNILVR: Hindustan Unilever
+    ITC: ITC
+    NESTLEIND: Nestle India
+    BRITANNIA: Britannia Industries
+    TATACONSUM: Tata Consumer Products
+    TITAN: Titan Company
+
+  Pharma & Healthcare:
+    SUNPHARMA: Sun Pharmaceutical Industries
+    CIPLA: Cipla
+    DRREDDY: Dr Reddys Laboratories
+    DIVISLAB: Divis Laboratories
+    APOLLOHOSP: Apollo Hospitals Enterprise
+
+  Auto:
+    MARUTI: Maruti Suzuki India
+    M&M: Mahindra & Mahindra
+    TMPV: Tata Motors Passenger Vehicles
+    TMCV: Tata Motors Commercial Vehicles
+    EICHERMOT: Eicher Motors
+    BAJAJ-AUTO: Bajaj Auto
+    HEROMOTOCO: Hero MotoCorp
+
+  Oil & Gas:
+    RELIANCE: Reliance Industries
+    ONGC: Oil & Natural Gas Corporation
+    IOC: Indian Oil Corporation
+    BPCL: Bharat Petroleum Corporation
+
+  Power & Utilities:
+    NTPC: NTPC
+    POWERGRID: Power Grid Corporation of India
+
+  Metals & Mining:
+    TATASTEEL: Tata Steel
+    JSWSTEEL: JSW Steel
+    HINDALCO: Hindalco Industries
+    COALINDIA: Coal India
+
+  Cement:
+    ULTRACEMCO: UltraTech Cement
+    GRASIM: Grasim Industries
+
+  Infra & Engineering:
+    LT: Larsen & Toubro
+    ADANIPORTS: Adani Ports and Special Economic Zone
+    SIEMENS: Siemens
+
+  Defence & Aerospace:
+    BEL: Bharat Electronics
+    HAL: Hindustan Aeronautics
+
+  Telecom:
+    BHARTIARTL: Bharti Airtel
+
+  Retail & E-commerce:
+    DMART: Avenue Supermarts
+    TRENT: Trent
+    ETERNAL: Eternal (Zomato)
+
+  Diversified:
+    ADANIENT: Adani Enterprises
+
+  Chemicals:
+    PIDILITIND: Pidilite Industries
+    ASIANPAINT: Asian Paints
+
+# Quality extras (Nifty 100/high-quality, news yahin kheenchega)
+extra_focus:
+  - HAVELLS.NS
+  - BOSCHLTD.NS

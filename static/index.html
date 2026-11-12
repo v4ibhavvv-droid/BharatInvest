@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BharatInvest — Indian Equity Investment Desk</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23153a5b'/><text x='32' y='46' font-size='42' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>₹</text></svg>"/>
+<link rel="stylesheet" href="/style.css?v=1.6"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">₹</span>
+    <div>
+      <div class="brand-name">BharatInvest</div>
+      <div class="brand-tag">NSE·BSE long-term investment research desk</div>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" data-tab="home">Dashboard</button>
+    <button class="tab" data-tab="screen">Screener</button>
+    <button class="tab" data-tab="stock">Stock Analysis</button>
+    <button class="tab" data-tab="portfolio">My Portfolio</button>
+  </nav>
+  <button class="btn btn-sm" id="btn-ai" title="AI explain settings (Google AI Studio key)">✨ AI</button>
+  <div class="note">Research &amp; education only — not investment advice</div>
+</header>
+
+<main>
+
+  <!-- ============ DASHBOARD ============ -->
+  <section id="tab-home" class="tab-page active">
+    <div class="grid market-grid" id="market-strip"></div>
+
+    <div class="grid cols-3">
+      <div class="card" id="fii-card"><h3>FII / DII flows</h3><div class="muted small">Loading…</div></div>
+      <div class="card" id="breadth-card"><h3>Market breadth</h3><div class="muted small">Awaiting scan…</div></div>
+      <div class="card" id="how-card">
+        <h3>How to use</h3>
+        <ol class="small muted">
+          <li>Dashboard → <b>Top candidates</b> (ranked by 5-pillar score).</li>
+          <li>Click a stock → full <b>deep-dive</b> (fundamentals, 10-yr financials, DCF, risks, verdict).</li>
+          <li>Screener → apply <b>your own filters</b> (ROE, debt, growth…).</li>
+          <li><b>My Portfolio</b> → apni holdings, P&amp;L/CAGR, sector mix + Allocation Guru.</li>
+          <li>Cross-check final decision on NSE / screener.in before investing.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>Top investment candidates</h2>
+      <div>
+        <span class="muted small" id="scan-meta"></span>
+        <button class="btn btn-sm" id="btn-rescan">Refresh scan</button>
+        <button class="btn btn-sm" id="btn-csv">Export CSV</button>
+      </div>
+    </div>
+    <div class="grid top-grid" id="top-cards"></div>
+
+    <div class="section-head"><h2>Full ranking — Nifty 50 + quality extras</h2></div>
+    <div class="card table-wrap" id="rank-table"></div>
+  </section>
+
+  <!-- ============ SCREENER ============ -->
+  <section id="tab-screen" class="tab-page">
+    <div class="card">
+      <h2>Your filters</h2>
+      <div class="filters">
+        <label>Sector
+          <select id="f-sector"><option value="">All</option></select></label>
+        <label>Rating
+          <select id="f-rating">
+            <option value="">Any</option>
+            <option>STRONG BUY</option><option>BUY</option><option>HOLD</option><option>AVOID</option>
+          </select></label>
+        <label>Max P/E <input id="f-pe" type="number" min="0" placeholder="e.g. 30"/></label>
+        <label>Min ROE % <input id="f-roe" type="number" placeholder="e.g. 15"/></label>
+        <label>Max D/E <input id="f-de" type="number" step="0.1" placeholder="e.g. 0.5"/></label>
+        <label>Min profit CAGR % <input id="f-cagr" type="number" placeholder="e.g. 12"/></label>
+        <label>Min div yield % <input id="f-dy" type="number" step="0.1" placeholder="e.g. 1"/></label>
+        <label>Min score <input id="f-score" type="number" min="0" max="100" placeholder="e.g. 60"/></label>
+        <label>RSI between
+          <span class="range-pair"><input id="f-rsi1" type="number" placeholder="30"/>–<input id="f-rsi2" type="number" placeholder="65"/></span></label>
+        <label class="chk"><input type="checkbox" id="f-above200"/> Above 200-DMA only</label>
+        <label>PA trend
+          <select id="f-trend">
+            <option value="">Any</option>
+            <option>UP</option><option>DOWN</option><option>DOWN?</option><option>SIDEWAYS</option>
+          </select></label>
+        <label>PA breakout
+          <select id="f-breakout">
+            <option value="">Any</option>
+            <option value="fresh+">fresh +vol</option><option value="fresh">fresh</option>
+            <option value="retest">retest</option><option value="false">false</option>
+            <option value="breakdown">breakdown</option>
+          </select></label>
+        <button class="btn btn-primary" id="btn-apply">Apply filters</button>
+        <button class="btn" id="btn-clear">Clear</button>
+      </div>
+      <div class="muted small" id="screen-hint">Filters run on the latest scan (cached). Use “Refresh scan” in Dashboard to pull fresh data.</div>
+    </div>
+    <div class="table-wrap card" id="screen-table"></div>
+  </section>
+
+  <!-- ============ MY PORTFOLIO ============ -->
+  <section id="tab-portfolio" class="tab-page">
+    <div class="grid cols-3" id="pf-totals"><div class="card muted small">Loading…</div></div>
+
+    <div class="grid cols-2" style="margin-bottom:14px">
+      <div class="card">
+        <h3>Add / update holding</h3>
+        <div class="hold-form">
+          <input id="pf-sym" list="uni-list" placeholder="Symbol — e.g. RELIANCE" style="flex:2;min-width:150px"/>
+          <input id="pf-qty" type="number" min="0" step="1" placeholder="Qty" style="flex:1;min-width:80px"/>
+          <input id="pf-avg" type="number" min="0" step="0.01" placeholder="Avg ₹/share" style="flex:1;min-width:100px"/>
+          <input id="pf-date" type="date" title="Buying date (optional — har holding ka CAGR aayega)" style="flex:1;min-width:130px"/>
+          <button class="btn btn-primary" id="btn-pf-add">Add / Update</button>
+        </div>
+        <div class="hold-form">
+          <input type="file" id="pf-file" accept=".csv,.txt" style="flex:2;min-width:170px;font-size:12px"/>
+          <button class="btn" id="btn-pf-import">Import CSV</button>
+          <button class="btn" id="btn-pf-clear">Clear all</button>
+        </div>
+        <div class="muted small" style="margin-top:6px">
+          Zerodha Console → Holdings CSV / Groww holdings CSV seedha import — ya simple
+          <code>symbol,qty,avg[,date]</code> file. Sab kuch tumhare laptop par hi save hota hai
+          (<code>portfolio.json</code>). Buying date dala to har stock ka CAGR dikhega.
+        </div>
+        <div class="muted small" id="pf-msg" style="margin-top:4px"></div>
+      </div>
+      <div class="card">
+        <h3>Allocation Guru</h3>
+        <div class="search-row">
+          <input id="alloc-budget" type="number" min="1000" placeholder="Budget ₹ — e.g. 100000"/>
+          <button class="btn btn-primary" id="btn-alloc">Plan karo</button>
+        </div>
+        <div id="alloc-out" class="muted small" style="margin-top:8px">
+          Tumhare latest scan ke <b>BUY/STRONG BUY</b> stocks me budget ka risk-balanced plan —
+          kam-volatile stock ko zyada weight (35% max/stock).
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head"><h2>My holdings</h2><span class="muted small" id="pf-meta"></span></div>
+    <div class="card table-wrap" id="pf-table"></div>
+  </section>
+
+  <!-- ============ STOCK ANALYSIS ============ -->
+  <section id="tab-stock" class="tab-page">
+    <div class="card search-card">
+      <h2>Stock deep-dive</h2>
+      <div class="search-row">
+        <input id="stock-input" list="uni-list" placeholder="Type company / symbol — e.g. RELIANCE, HDFCBANK, TCS"/>
+        <datalist id="uni-list"></datalist>
+        <button class="btn btn-primary" id="btn-analyze">Analyze</button>
+      </div>
+      <div class="muted small">BSE-only stock? Company-symbol <code>BOSCHLTD.BO</code> ya BSE numeric code <code>500325.BO</code> — dono chalega (numeric auto-map hota hai). Data: Yahoo Finance + NSE + Screener.in (delayed/EOD).</div>
+    </div>
+
+    <div id="stock-detail" class="muted" style="min-height:120px">
+      Search a company above to see its full investment report — fundamentals, technicals, DCF, red flags, news and a plain-language verdict.
+    </div>
+  </section>
+
+</main>
+
+<!-- AI settings modal -->
+<div class="ai-modal-back" id="ai-modal-back" style="display:none">
+  <div class="ai-modal">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0">✨ AI explain — Google AI Studio key</h3>
+      <button class="dellink" id="ai-modal-close" title="Band karo">✕</button>
+    </div>
+    <div id="ai-modal-status" class="muted small" style="margin:8px 0">Checking…</div>
+    <div class="muted small" style="margin-bottom:6px">
+      Free key yahan se banao: <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">aistudio.google.com/app/apikey</a><br/>
+      Key sirf tumhari machine par <code>.ai_key</code> file me save hoti hai — upload/kahin bheji nahi jaati.
+    </div>
+    <div class="search-row">
+      <input id="ai-key-input" type="password" placeholder="Paste API key (AIza…)" autocomplete="off"/>
+      <button class="btn btn-primary" id="btn-ai-key-save">Save</button>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:10px;align-items:center">
+      <button class="btn btn-sm" id="btn-ai-key-clear">Remove key</button>
+      <span class="muted small" id="ai-modal-msg"></span>
+    </div>
+    <div class="muted small" style="margin-top:10px">
+      Key save hone ke baad har card par ✨ explain button + "Ask AI" box active ho jaayega.
+    </div>
+  </div>
+</div>
+
+<footer>
+  <b>BharatInvest</b> · Combines screening, 5-pillar ranking, DCF, forensics (F-Score), market breadth, FII/DII, Nifty valuation gauge, 10-yr financials, news &amp; a local portfolio tracker.
+  Data: Yahoo Finance (delayed/EOD), NSE public endpoints, Screener.in, Google News. Educational research — verify every number before investing. Not SEBI-registered advice.
+</footer>
+
+<script src="/app.js?v=2.0"></script>
+</body>
+</html>

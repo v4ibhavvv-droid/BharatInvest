@@ -1,0 +1,9 @@
+.venv/
+.cache_bh/
+.ai_key
+*.log
+scan_result.txt
+hang_trace.txt
+__pycache__/
+.DS_Store
+portfolio.json
